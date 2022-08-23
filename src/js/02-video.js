@@ -12,25 +12,27 @@ const onPlay = function(date) {
 
  player.on('timeupdate', throttle(onPlay, 1000));
 
- const currentTime = JSON.parse(
-   localStorage.getItem('videoplayer-current-time')
- );
+ const currentTime = JSON.parse(localStorage.getItem('videoplayer-current-time'))
+   if (currentTime) {
+    player
+ .setCurrentTime(currentTime.seconds)
+   }
  console.log(currentTime);
 
- player
- .setCurrentTime(currentTime.seconds)
- .then(function (seconds) {
-   console.log(seconds);
- })
- .catch(function (error) {
-   switch (error.name) {
-     case 'RangeError':
-       // the time was less than 0 or greater than the video’s duration
-       break;
+//  player
+//  .setCurrentTime(currentTime.seconds)
+//  .then(function (seconds) {
+//    console.log(seconds);
+//  })
+//  .catch(function (error) {
+//    switch (error.name) {
+//      case 'RangeError':
+//        // the time was less than 0 or greater than the video’s duration
+//        break;
 
-     default:
-       // some other error occurred
-       break;
-   }
- });
+//      default:
+//        // some other error occurred
+//        break;
+//    }
+//  });
 
